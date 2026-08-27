@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/AspireTopology.Hosting/AspireTopology.Hosting.csproj" />
+    <Project Path="src/AspireTopology.Isoflow/AspireTopology.Isoflow.csproj" />
+    <Project Path="src/AspireTopology/AspireTopology.csproj" Id="c3dee610-5136-4852-8a6d-d0826cd9209c" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/AspireTopology.Hosting.Tests/AspireTopology.Hosting.Tests.csproj" />
+    <Project Path="tests/AspireTopology.Isoflow.Tests/AspireTopology.Isoflow.Tests.csproj" />
+    <Project Path="tests/AspireTopology.Tests/AspireTopology.Tests.csproj" />
+  </Folder>
+</Solution>
