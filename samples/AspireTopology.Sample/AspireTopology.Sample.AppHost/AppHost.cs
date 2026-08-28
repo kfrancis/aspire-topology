@@ -20,16 +20,12 @@ builder.AddProject<Projects.AspireTopology_Sample_Web>("web")
     .WaitFor(api)
     .WithTopologyMetadata(x => x.Group = "Frontend");
 
-// Registers the "topology" pipeline step. Run: aspire do topology
+// Refreshes the artifacts on start and lists the viewer in the dashboard, both by default.
+// Also registers the "topology" pipeline step, for: aspire do topology
 builder.AddTopologyDiagram(options =>
 {
+    // Only overridden here so the sample writes to the repository root rather than next to itself.
     options.OutputPath = "../../../artifacts/topology";
-
-    // Also refresh the artifacts whenever the AppHost starts.
-    options.GenerateOnStart = true;
-
-    // List the topology viewer in the Aspire dashboard.
-    options.Viewer = true;
 });
 
 builder.Build().Run();

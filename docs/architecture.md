@@ -65,8 +65,13 @@ AppHost start       ──►  Startup/TopologyStartupGeneration ┘   (opt-in, 
 ```
 
 Both entry points share the extractor and the writer, so they produce identical files. The startup
-path is opt-in through `TopologyDiagramOptions.GenerateOnStart`, is registered only in run mode,
+path is on by default (`TopologyDiagramOptions.GenerateOnStart`), is registered only in run mode,
 and downgrades write failures to a warning: a diagram is not worth failing an app run over.
+
+Defaulting it on is a deliberate choice about what `AddTopologyDiagram()` means. One call should
+give a working diagram, in the dashboard, kept current — not a registration that does nothing until
+someone remembers a second command. Because both paths are run-mode only, publish and deploy see
+no difference.
 
 Run mode adds orchestration resources the pipeline never sees. Those that Aspire marks
 `HiddenBehavior.Always` are filtered out during extraction, which is what keeps the two paths in
@@ -74,7 +79,7 @@ agreement.
 
 ## The viewer
 
-`TopologyDiagramOptions.Viewer` adds a `TopologyViewerResource` to the application model and starts
+`TopologyDiagramOptions.Viewer`, on by default, adds a `TopologyViewerResource` to the model and starts
 a small Kestrel server inside the AppHost process. `TopologyViewerService` publishes the resource's
 state and URL through `ResourceNotificationService`, which is what makes it appear in the dashboard
 list next to everything else.

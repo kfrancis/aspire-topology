@@ -38,11 +38,8 @@ Open the result in the [viewer](viewer/AspireTopology.Viewer) for an interactive
 
 ## In the dashboard
 
-```csharp
-builder.AddTopologyDiagram(options => options.Viewer = true);
-```
-
-`aspire run` now lists **topology** in the Aspire dashboard with a clickable URL, the way an
+That one `AddTopologyDiagram()` call is also all it takes to get the diagram into the dashboard.
+`aspire run` lists **topology** alongside your other resources, with a clickable URL, the way an
 integration lists its management UI:
 
 ```text
@@ -81,19 +78,32 @@ builder.AddTopologyDiagram(options =>
     options.OutputPath = "./docs/architecture";
     options.IncludeParameters = false;
     options.IncludeEndpoints = true;
-
-    // Also refresh the files every time the AppHost starts, so F5 keeps the diagram current.
-    options.GenerateOnStart = true;
-
-    // List the interactive diagram in the Aspire dashboard, alongside your other resources.
-    options.Viewer = true;
 });
 ```
 
-`GenerateOnStart` is off by default. `aspire do topology` is the deliberate way to produce
-artifacts; turning this on means running the app refreshes them too. Both paths share the same
-extractor and writer and produce identical files, and a failure to write on start is logged as a
-warning rather than failing the run.
+| Option | Default | |
+| --- | --- | --- |
+| `OutputPath` | `artifacts/topology` | Relative to the AppHost directory unless absolute. |
+| `FileName` | `topology` | Base name of the generated files. |
+| `GenerateOnStart` | `true` | Refresh the files every time the AppHost starts. |
+| `Viewer` | `true` | List the interactive diagram in the Aspire dashboard. |
+| `ViewerResourceName` | `topology` | The dashboard row's name. |
+| `IncludeEndpoints` | `true` | Copy declared endpoints into node properties. |
+| `IncludeParameters` | `false` | Parameters are configuration, not architecture. |
+
+`GenerateOnStart` and `Viewer` only ever apply in run mode, so publish and deploy are untouched.
+Both share the extractor and writer with `aspire do topology` and produce identical output, and
+neither can fail a run: a write error or a viewer that will not start is logged as a warning.
+
+If you would rather nothing appeared without asking:
+
+```csharp
+builder.AddTopologyDiagram(options =>
+{
+    options.GenerateOnStart = false;   // only write when `aspire do topology` is run
+    options.Viewer = false;            // no dashboard entry
+});
+```
 
 Describe individual resources with annotations, so the metadata travels with the resource instead
 of living in a side file:

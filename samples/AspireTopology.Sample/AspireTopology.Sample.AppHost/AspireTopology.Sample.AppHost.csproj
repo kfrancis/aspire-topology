@@ -1,17 +1,20 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <Sdk Name="Aspire.AppHost.Sdk" Version="13.5.3" />
+<Project Sdk="Aspire.AppHost.Sdk/13.5.3">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <IsAspireHost>true</IsAspireHost>
     <UserSecretsId>aspire-topology-sample</UserSecretsId>
-    <!-- The globally installed Aspire CLI runs "aspire do topology"; the bundle is not needed here. -->
+    <!--
+      false brings the DCP orchestration and dashboard binaries into the project as packages, so the
+      built AppHost runs standalone. true instead bakes in paths resolved from an installed Aspire
+      CLI, which Visual Studio's F5 (commandName: Project) cannot rely on: it launches the built
+      executable directly rather than through the CLI, and fails with missing CliPath/DashboardPath.
+      ASPIRE010 warns that some CLI-bundle features are unavailable; running the app is not one.
+    -->
+    <AspireUseCliBundle>false</AspireUseCliBundle>
     <NoWarn>$(NoWarn);ASPIRE010</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aspire.Hosting.AppHost" />
     <PackageReference Include="Aspire.Hosting.PostgreSQL" />
     <PackageReference Include="Aspire.Hosting.Redis" />
   </ItemGroup>
