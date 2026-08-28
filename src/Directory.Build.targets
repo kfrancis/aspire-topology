@@ -1,0 +1,17 @@
+<Project>
+
+	<!--
+		Directory.Build.props evaluates before a project can opt into packing.
+		Add the pack-time tooling here so it sees each project's final IsPackable
+		value, while keeping it out of applications and test projects.
+	-->
+	<ItemGroup Condition="'$(IsPackable)' == 'true'">
+		<PackageReference Include="DotNet.ReproducibleBuilds" PrivateAssets="all" />
+		<PackageReference Include="MinVer" PrivateAssets="all" />
+	</ItemGroup>
+
+	<PropertyGroup Condition="'$(IsPackable)' == 'true'">
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	</PropertyGroup>
+
+</Project>

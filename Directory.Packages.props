@@ -1,18 +1,19 @@
 <Project>
 
-  <PropertyGroup>
-    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
-    <AspireVersion>13.5.3</AspireVersion>
-  </PropertyGroup>
+	<PropertyGroup>
+		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+		<CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+		<AspireVersion>13.5.3</AspireVersion>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <!-- Aspire.Hosting.AppHost is implicitly referenced by Aspire.AppHost.Sdk and must not be pinned here. -->
-    <PackageVersion Include="Aspire.Hosting" Version="$(AspireVersion)" />
-    <PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="$(AspireVersion)" />
-    <PackageVersion Include="Aspire.Hosting.Redis" Version="$(AspireVersion)" />
-    <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0" />
-    <PackageVersion Include="TUnit" Version="1.65.68" />
-  </ItemGroup>
+	<ItemGroup>
+		<!-- Aspire.Hosting.AppHost is implicitly referenced by Aspire.AppHost.Sdk and must not be pinned here. -->
+		<PackageVersion Include="Aspire.Hosting" Version="$(AspireVersion)" />
+		<PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="$(AspireVersion)" />
+		<PackageVersion Include="Aspire.Hosting.Redis" Version="$(AspireVersion)" />
+		<PackageVersion Include="DotNet.ReproducibleBuilds" Version="2.0.5" />
+		<PackageVersion Include="MinVer" Version="7.0.0" />
+		<PackageVersion Include="TUnit" Version="1.65.68" />
+	</ItemGroup>
 
 </Project>

@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <IsPackable>true</IsPackable>
     <Description>Generates architecture topology directly from an Aspire AppHost by reading the DistributedApplicationModel. Adds the 'aspire do topology' pipeline step.</Description>
   </PropertyGroup>
 

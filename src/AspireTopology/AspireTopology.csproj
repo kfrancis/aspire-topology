@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <IsPackable>true</IsPackable>
     <Description>Renderer-independent architecture topology model: nodes, edges, groups, layout and serialization. No dependency on Aspire or any renderer.</Description>
   </PropertyGroup>
 

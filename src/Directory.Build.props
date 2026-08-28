@@ -1,22 +1,51 @@
 <Project>
 
-  <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+	<Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
 
-  <PropertyGroup>
-    <IsPackable>true</IsPackable>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-  </PropertyGroup>
+	<!--
+		Shared NuGet metadata for the shippable libraries (roadmap B15).
+		Packing is OPT-IN: each packable csproj sets <IsPackable>true</IsPackable> and its
+		own <Description>; apps/tools under src (console, DevTools, MAUI shell) stay
+		unpackable by default.
+	-->
+	<PropertyGroup>
+		<IsPackable>false</IsPackable>
+		<Authors>Kori Francis</Authors>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/kfrancis/aspire-topology</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/kfrancis/aspire-topology</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>obd;obd2;elm327;can;ev;nissan-leaf;ble;telemetry</PackageTags>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<!--
+			Embedded (not portable+snupkg): pdb bytes live inside the dll itself, so any
+			consuming app's local build output already has resolvable debug info — no
+			separate symbol-server restore step required for downstream Sentry uploads.
+		-->
+		<DebugType>embedded</DebugType>
+		<!-- docs/PACKAGE.md is included as README.md for each package. -->
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <!--
-      The packages ship docs/PACKAGE.md rather than the repository README. The README uses relative
-      image paths, which is what GitHub needs to render them while the repository is private, and
-      nuget.org cannot resolve those. PACKAGE.md carries no images.
-    -->
-    <None Include="$(MSBuildThisFileDirectory)../docs/PACKAGE.md" Pack="true" PackagePath="\README.md" Visible="false" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="all" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="$(MSBuildThisFileDirectory)../docs/PACKAGE.md" Pack="true" PackagePath="\README.md" Visible="false" />
+	</ItemGroup>
+
+	<!--
+		Versioning: MinVer computes the version from git tags (prefix "v", e.g.
+		v0.1.0-preview.1). On a tagged commit the version IS the tag; between tags it's
+		the last tag + commit height with the preview pre-release identifier. Requires
+		full git history at build time (CI checkouts use fetch-depth: 0).
+		Applied only to packable projects — apps/tools keep default versioning.
+	-->
+	<!-- Unconditional: Directory.Build.props properties evaluate before the csproj
+       body sets IsPackable, so a condition here would never see 'true'. These are
+       inert in projects that don't reference MinVer (the ItemGroup below is
+       item-phase and CAN see IsPackable). -->
+	<PropertyGroup>
+		<MinVerTagPrefix>v</MinVerTagPrefix>
+		<MinVerDefaultPreReleaseIdentifiers>preview.0</MinVerDefaultPreReleaseIdentifiers>
+	</PropertyGroup>
 
 </Project>
