@@ -5,7 +5,29 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <InternalsVisibleTo Include="AspireTopology.Hosting.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Aspire.Hosting" />
+    <!-- AppHosts already reference the ASP.NET Core shared framework; the in-process viewer uses it. -->
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <!--
+    The viewer front end is built by viewer/AspireTopology.Viewer and its dist output is checked in,
+    so building or packing this project never needs npm. Rebuild it with `npm run build` in that
+    directory and commit the result when the viewer changes.
+  -->
+  <PropertyGroup>
+    <ViewerDistDirectory>$(MSBuildThisFileDirectory)../../viewer/AspireTopology.Viewer/dist/</ViewerDistDirectory>
+  </PropertyGroup>
+
+  <ItemGroup Condition="Exists('$(ViewerDistDirectory)index.html')">
+    <ViewerAsset Include="$(ViewerDistDirectory)**/*" Exclude="$(ViewerDistDirectory)topology*.json" />
+    <EmbeddedResource Include="@(ViewerAsset)">
+      <LogicalName>viewer/%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>

@@ -16,6 +16,12 @@
     <Project Path="tests/AspireTopology.Isoflow.Tests/AspireTopology.Isoflow.Tests.csproj" />
     <Project Path="tests/AspireTopology.Tests/AspireTopology.Tests.csproj" />
   </Folder>
+  <Folder Name="/viewer/">
+    <Project Path="viewer/AspireTopology.Viewer/AspireTopology.Viewer.esproj">
+      <Build />
+      <Deploy />
+    </Project>
+  </Folder>
   <Folder Name="/samples/">
     <Project Path="samples/AspireTopology.Sample/AspireTopology.Sample.AppHost/AspireTopology.Sample.AppHost.csproj" />
     <Project Path="samples/AspireTopology.Sample/AspireTopology.Sample.Api/AspireTopology.Sample.Api.csproj" />

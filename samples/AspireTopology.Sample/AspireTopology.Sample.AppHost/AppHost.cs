@@ -27,6 +27,9 @@ builder.AddTopologyDiagram(options =>
 
     // Also refresh the artifacts whenever the AppHost starts.
     options.GenerateOnStart = true;
+
+    // List the topology viewer in the Aspire dashboard.
+    options.Viewer = true;
 });
 
 builder.Build().Run();

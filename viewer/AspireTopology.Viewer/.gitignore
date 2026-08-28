@@ -1,3 +1,6 @@
 node_modules/
-dist/
 public/topology.isoflow.json
+
+# dist/ is intentionally NOT ignored: AspireTopology.Hosting embeds it, so the .NET build never
+# needs Node.js. Rebuild with `npm run build` and commit the result when the viewer changes.
+dist/topology*.json

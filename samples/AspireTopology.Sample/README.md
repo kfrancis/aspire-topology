@@ -10,9 +10,10 @@ aspire do topology
 
 Artifacts land in `artifacts/topology/` at the repository root.
 
-The sample also sets `GenerateOnStart`, so `aspire run` (or F5) refreshes the same files. Note that
-running the app needs a container runtime for Postgres and Redis, while `aspire do topology` does
-not start anything.
+The sample also sets `GenerateOnStart`, so `aspire run` (or F5) refreshes the same files, and
+`Viewer`, so the dashboard lists a **topology** resource with a link to the interactive diagram.
+Note that running the app needs a container runtime for Postgres and Redis, while
+`aspire do topology` does not start anything.
 
 ## No ServiceDefaults
 

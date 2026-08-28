@@ -1,6 +1,10 @@
 using AspireTopology.Hosting;
 using AspireTopology.Hosting.Pipeline;
 using AspireTopology.Hosting.Startup;
+using AspireTopology.Hosting.Viewer;
+using Aspire.Hosting.ApplicationModel;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Aspire.Hosting;
 
@@ -41,6 +45,25 @@ public static class DistributedApplicationBuilderExtensions
             TopologyStartupGeneration.Add(builder, options);
         }
 
+        // The viewer is served from inside the AppHost, so there is nothing to publish or deploy.
+        if (options.Viewer && builder.ExecutionContext.IsRunMode)
+        {
+            AddViewer(builder, options);
+        }
+
         return builder;
+    }
+
+    private static void AddViewer(IDistributedApplicationBuilder builder, TopologyDiagramOptions options)
+    {
+        var resource = new TopologyViewerResource(options.ViewerResourceName);
+        builder.AddResource(resource);
+
+        builder.Services.AddHostedService(services => new TopologyViewerService(
+            resource,
+            options,
+            services.GetRequiredService<DistributedApplicationModel>(),
+            services.GetRequiredService<ResourceNotificationService>(),
+            services.GetRequiredService<ILogger<TopologyViewerService>>()));
     }
 }

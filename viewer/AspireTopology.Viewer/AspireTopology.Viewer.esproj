@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/1.0.6537497">
+
+  <PropertyGroup>
+    <!-- F5 in Visual Studio starts the Vite dev server. -->
+    <StartupCommand>npm run dev</StartupCommand>
+    <JavaScriptTestRoot>src\</JavaScriptTestRoot>
+    <BuildOutputFolder>$(MSBuildProjectDirectory)\dist</BuildOutputFolder>
+
+    <!--
+      The .NET build never builds the front end. dist/ is checked in and embedded by
+      AspireTopology.Hosting, so `dotnet build` works on machines with no Node.js. Rebuild with
+      `npm run build` here and commit the result when the viewer changes.
+    -->
+    <ShouldRunNpmInstall>false</ShouldRunNpmInstall>
+    <ShouldRunBuildScript>false</ShouldRunBuildScript>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+</Project>

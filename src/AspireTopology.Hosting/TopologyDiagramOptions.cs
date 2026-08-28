@@ -40,6 +40,20 @@ public sealed class TopologyDiagramOptions
     public bool GenerateOnStart { get; set; }
 
     /// <summary>
+    /// Serve the topology viewer from inside the AppHost and list it in the Aspire dashboard, the
+    /// way an integration lists a management UI.
+    /// </summary>
+    /// <remarks>
+    /// Off by default, and only ever applies in run mode. The viewer needs no container runtime
+    /// and no Node.js: its front end is embedded in this package, and it renders the topology from
+    /// the live application model on each request rather than from a file.
+    /// </remarks>
+    public bool Viewer { get; set; }
+
+    /// <summary>Name of the viewer resource shown in the dashboard.</summary>
+    public string ViewerResourceName { get; set; } = "topology";
+
+    /// <summary>
     /// The renderers run after <c>topology.json</c> is written. Defaults to Isoflow.
     /// </summary>
     public IList<ITopologyRenderer> Renderers { get; } = [new IsoflowTopologyRenderer()];

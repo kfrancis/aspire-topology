@@ -36,6 +36,34 @@ artifacts/
 
 Open the result in the [viewer](viewer/AspireTopology.Viewer) for an interactive isometric diagram.
 
+## In the dashboard
+
+```csharp
+builder.AddTopologyDiagram(options => options.Viewer = true);
+```
+
+`aspire run` now lists **topology** in the Aspire dashboard with a clickable URL, the way an
+integration lists its management UI:
+
+```text
+Name       State     URLs
+topology   Running   http://127.0.0.1:63304
+```
+
+The viewer is served from inside the AppHost. No container runtime, no Node.js, no second package:
+its front end is embedded in `AspireTopology.Hosting`. It renders from the live
+`DistributedApplicationModel` on every request rather than from a file, so what the dashboard links
+to is never stale, and it exposes the raw model too:
+
+```text
+/                          the interactive diagram
+/topology.json             the topology document
+/topology.isoflow.json     the rendered Isoflow document
+```
+
+It binds to loopback on an OS-assigned port, and a failure to start is logged as a warning rather
+than taking the app run down with it.
+
 ## Install
 
 ```bash
@@ -56,6 +84,9 @@ builder.AddTopologyDiagram(options =>
 
     // Also refresh the files every time the AppHost starts, so F5 keeps the diagram current.
     options.GenerateOnStart = true;
+
+    // List the interactive diagram in the Aspire dashboard, alongside your other resources.
+    options.Viewer = true;
 });
 ```
 
@@ -129,6 +160,16 @@ tests/       unit tests and renderer snapshots
 samples/     a sample AppHost with a project, a database, a cache and a front end
 viewer/      a React viewer built on the Isoflow component
 docs/        architecture, model and renderer authoring notes
+```
+
+The viewer is in the solution as an `.esproj`, so Visual Studio shows it in Solution Explorer and
+F5 on it starts the Vite dev server. The .NET build never runs npm: the viewer's `dist` output is
+checked in and embedded by `AspireTopology.Hosting`, which is what lets the package ship the front
+end without forcing Node.js on anyone building the repo. Rebuild it and commit the result when the
+viewer changes:
+
+```bash
+npm run build --prefix viewer/AspireTopology.Viewer
 ```
 
 ## Build it

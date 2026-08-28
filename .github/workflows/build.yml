@@ -63,3 +63,8 @@ jobs:
 
       - name: Type check
         run: npm run typecheck
+
+      # dist/ is checked in and embedded by AspireTopology.Hosting. Building it here proves the
+      # front end still compiles, even though the .NET build never runs npm.
+      - name: Build
+        run: npm run build

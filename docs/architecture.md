@@ -72,6 +72,33 @@ Run mode adds orchestration resources the pipeline never sees. Those that Aspire
 `HiddenBehavior.Always` are filtered out during extraction, which is what keeps the two paths in
 agreement.
 
+## The viewer
+
+`TopologyDiagramOptions.Viewer` adds a `TopologyViewerResource` to the application model and starts
+a small Kestrel server inside the AppHost process. `TopologyViewerService` publishes the resource's
+state and URL through `ResourceNotificationService`, which is what makes it appear in the dashboard
+list next to everything else.
+
+```text
+TopologyViewerResource      no process, no container, IResourceWithoutLifetime
+TopologyViewerService       IHostedService: serves the front end, publishes state and URL
+TopologyViewerAssets        the built front end, embedded in the assembly
+```
+
+Three consequences worth knowing:
+
+- **It renders from the live model, not from disk.** `/topology.json` and `/topology.isoflow.json`
+  run the extractor per request. Nothing can go stale, and runtime state has an obvious home later.
+- **It excludes itself.** The resource carries a `TopologyMetadataAnnotation { Exclude = true }`,
+  so the viewer never shows up in its own diagram.
+- **It cannot break a run.** Failures are logged and published as `FailedToStart`; the app carries
+  on without a diagram.
+
+The front end is built by `viewer/AspireTopology.Viewer` and its `dist` output is checked in, then
+embedded by an MSBuild glob. That is a deliberate trade: a checked-in build artifact, in exchange
+for a .NET build and a NuGet package that never depend on Node.js. `ViewerAssetTests` fails loudly
+if the glob ever stops matching.
+
 ## The experimental pipeline API
 
 Aspire marks its pipeline API experimental (`ASPIREPIPELINES001`). Every use of it lives in
