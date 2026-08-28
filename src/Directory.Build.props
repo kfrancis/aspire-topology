@@ -10,7 +10,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)../README.md" Pack="true" PackagePath="\" Visible="false" />
+    <!--
+      The packages ship docs/PACKAGE.md rather than the repository README. The README uses relative
+      image paths, which is what GitHub needs to render them while the repository is private, and
+      nuget.org cannot resolve those. PACKAGE.md carries no images.
+    -->
+    <None Include="$(MSBuildThisFileDirectory)../docs/PACKAGE.md" Pack="true" PackagePath="\README.md" Visible="false" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="all" />
   </ItemGroup>
 
