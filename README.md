@@ -2,6 +2,8 @@
 
 **Generate architecture topology and diagrams directly from your Aspire AppHost.**
 
+![NuGet Version](https://img.shields.io/nuget/v/AspireTopology)
+
 Instead of parsing source code or maintaining architecture diagrams by hand, AspireTopology reads
 Aspire's `DistributedApplicationModel` and converts resources, references, dependencies, endpoints
 and containment relationships into a renderer-independent topology model. That topology is then
