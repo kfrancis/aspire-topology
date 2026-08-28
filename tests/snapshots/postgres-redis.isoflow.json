@@ -1,0 +1,240 @@
+{
+  "version": "1.0.0",
+  "title": "postgres-redis",
+  "icons": [
+    {
+      "id": "aspire-topology-service",
+      "name": "Service",
+      "url": "data:image/svg\u002Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0Ij48cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHJ4PSIxMCIgZmlsbD0iIzI1NjNlYiIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSIzLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI\u002BPHJlY3QgeD0iMTYiIHk9IjE4IiB3aWR0aD0iMzIiIGhlaWdodD0iMjgiIHJ4PSI0Ii8\u002BPHBhdGggZD0iTTI0IDMwaDE2TTI0IDM4aDEwIi8\u002BPC9nPjwvc3ZnPg==",
+      "collection": "AspireTopology",
+      "isIsometric": false
+    },
+    {
+      "id": "aspire-topology-database",
+      "name": "Database",
+      "url": "data:image/svg\u002Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0Ij48cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHJ4PSIxMCIgZmlsbD0iIzdjM2FlZCIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSIzLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI\u002BPGVsbGlwc2UgY3g9IjMyIiBjeT0iMjAiIHJ4PSIxNiIgcnk9IjYiLz48cGF0aCBkPSJNMTYgMjB2MjRjMCAzLjMgNy4yIDYgMTYgNnMxNi0yLjcgMTYtNlYyMCIvPjxwYXRoIGQ9Ik0xNiAzMmMwIDMuMyA3LjIgNiAxNiA2czE2LTIuNyAxNi02Ii8\u002BPC9nPjwvc3ZnPg==",
+      "collection": "AspireTopology",
+      "isIsometric": false
+    },
+    {
+      "id": "aspire-topology-cache",
+      "name": "Cache",
+      "url": "data:image/svg\u002Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0Ij48cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHJ4PSIxMCIgZmlsbD0iI2RjMjYyNiIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSIzLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI\u002BPHBhdGggZD0iTTM0IDEyIDIwIDM2aDEybC0yIDE2IDE0LTI0SDMyeiIvPjwvZz48L3N2Zz4=",
+      "collection": "AspireTopology",
+      "isIsometric": false
+    }
+  ],
+  "colors": [
+    {
+      "id": "reference",
+      "value": "#2563eb"
+    },
+    {
+      "id": "dependency",
+      "value": "#94a3b8"
+    },
+    {
+      "id": "parent",
+      "value": "#7c3aed"
+    }
+  ],
+  "items": [
+    {
+      "id": "api",
+      "name": "api",
+      "description": "aspire.resourceType: ProjectResource\nendpoint.http.targetPort: 8080",
+      "icon": "aspire-topology-service"
+    },
+    {
+      "id": "appdb",
+      "name": "appdb",
+      "icon": "aspire-topology-database"
+    },
+    {
+      "id": "cache",
+      "name": "cache",
+      "description": "container.image: redis\ncontainer.tag: 7.4",
+      "icon": "aspire-topology-cache"
+    },
+    {
+      "id": "postgres",
+      "name": "postgres",
+      "icon": "aspire-topology-database"
+    },
+    {
+      "id": "web",
+      "name": "web",
+      "icon": "aspire-topology-service"
+    }
+  ],
+  "views": [
+    {
+      "id": "view-default",
+      "name": "Architecture",
+      "items": [
+        {
+          "id": "api",
+          "tile": {
+            "x": 0,
+            "y": 3
+          },
+          "labelHeight": 60
+        },
+        {
+          "id": "appdb",
+          "tile": {
+            "x": -2,
+            "y": 6
+          },
+          "labelHeight": 60
+        },
+        {
+          "id": "cache",
+          "tile": {
+            "x": 2,
+            "y": 6
+          },
+          "labelHeight": 60
+        },
+        {
+          "id": "postgres",
+          "tile": {
+            "x": -2,
+            "y": 0
+          },
+          "labelHeight": 60
+        },
+        {
+          "id": "web",
+          "tile": {
+            "x": 2,
+            "y": 0
+          },
+          "labelHeight": 60
+        }
+      ],
+      "connectors": [
+        {
+          "id": "api--reference--appdb",
+          "anchors": [
+            {
+              "id": "api--reference--appdb-from",
+              "ref": {
+                "item": "api"
+              }
+            },
+            {
+              "id": "api--reference--appdb-to",
+              "ref": {
+                "item": "appdb"
+              }
+            }
+          ],
+          "description": "Reference",
+          "color": "reference",
+          "style": "SOLID",
+          "width": 10
+        },
+        {
+          "id": "api--dependency--appdb",
+          "anchors": [
+            {
+              "id": "api--dependency--appdb-from",
+              "ref": {
+                "item": "api"
+              }
+            },
+            {
+              "id": "api--dependency--appdb-to",
+              "ref": {
+                "item": "appdb"
+              }
+            }
+          ],
+          "description": "Dependency",
+          "color": "dependency",
+          "style": "DASHED",
+          "width": 10
+        },
+        {
+          "id": "api--reference--cache",
+          "anchors": [
+            {
+              "id": "api--reference--cache-from",
+              "ref": {
+                "item": "api"
+              }
+            },
+            {
+              "id": "api--reference--cache-to",
+              "ref": {
+                "item": "cache"
+              }
+            }
+          ],
+          "description": "Reference",
+          "color": "reference",
+          "style": "SOLID",
+          "width": 10
+        },
+        {
+          "id": "appdb--parent--postgres",
+          "anchors": [
+            {
+              "id": "appdb--parent--postgres-from",
+              "ref": {
+                "item": "appdb"
+              }
+            },
+            {
+              "id": "appdb--parent--postgres-to",
+              "ref": {
+                "item": "postgres"
+              }
+            }
+          ],
+          "description": "Parent",
+          "color": "parent",
+          "style": "SOLID",
+          "width": 10
+        },
+        {
+          "id": "web--reference--api",
+          "anchors": [
+            {
+              "id": "web--reference--api-from",
+              "ref": {
+                "item": "web"
+              }
+            },
+            {
+              "id": "web--reference--api-to",
+              "ref": {
+                "item": "api"
+              }
+            }
+          ],
+          "description": "Reference",
+          "color": "reference",
+          "style": "SOLID",
+          "width": 10
+        }
+      ],
+      "rectangles": [
+        {
+          "id": "rect-contains-postgres",
+          "from": {
+            "x": -3,
+            "y": -1
+          },
+          "to": {
+            "x": -1,
+            "y": 7
+          },
+          "color": "reference"
+        }
+      ],
+      "textBoxes": []
+    }
+  ]
+}

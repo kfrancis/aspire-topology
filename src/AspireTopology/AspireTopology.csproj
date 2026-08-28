@@ -1,9 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Description>Renderer-independent architecture topology model: nodes, edges, groups, layout and serialization. No dependency on Aspire or any renderer.</Description>
   </PropertyGroup>
 
 </Project>

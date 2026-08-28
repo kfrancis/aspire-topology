@@ -1,0 +1,65 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  CI: true
+  DOTNET_NOLOGO: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+jobs:
+  dotnet:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - name: Restore
+        run: dotnet restore AspireTopology.slnx
+
+      - name: Build
+        run: dotnet build AspireTopology.slnx --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test AspireTopology.slnx --configuration Release --no-build
+
+      - name: Pack
+        run: |
+          for project in src/*/*.csproj; do
+            dotnet pack "$project" --configuration Release --no-build --output ./nupkg
+          done
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: packages
+          path: ./nupkg/*.nupkg
+
+  viewer:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: viewer/AspireTopology.Viewer
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install
+        run: npm install
+
+      - name: Type check
+        run: npm run typecheck

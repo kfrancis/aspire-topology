@@ -1,13 +1,16 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Description>Generates architecture topology directly from an Aspire AppHost by reading the DistributedApplicationModel. Adds the 'aspire do topology' pipeline step.</Description>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Aspire.Hosting" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\AspireTopology\AspireTopology.csproj" />
+    <ProjectReference Include="..\AspireTopology.Isoflow\AspireTopology.Isoflow.csproj" />
   </ItemGroup>
 
 </Project>

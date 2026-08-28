@@ -1,0 +1,88 @@
+{
+  "version": "1.0.0",
+  "title": "simple-app",
+  "icons": [
+    {
+      "id": "aspire-topology-service",
+      "name": "Service",
+      "url": "data:image/svg\u002Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0Ij48cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHJ4PSIxMCIgZmlsbD0iIzI1NjNlYiIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSIzLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI\u002BPHJlY3QgeD0iMTYiIHk9IjE4IiB3aWR0aD0iMzIiIGhlaWdodD0iMjgiIHJ4PSI0Ii8\u002BPHBhdGggZD0iTTI0IDMwaDE2TTI0IDM4aDEwIi8\u002BPC9nPjwvc3ZnPg==",
+      "collection": "AspireTopology",
+      "isIsometric": false
+    }
+  ],
+  "colors": [
+    {
+      "id": "reference",
+      "value": "#2563eb"
+    },
+    {
+      "id": "dependency",
+      "value": "#94a3b8"
+    },
+    {
+      "id": "parent",
+      "value": "#7c3aed"
+    }
+  ],
+  "items": [
+    {
+      "id": "api",
+      "name": "api",
+      "icon": "aspire-topology-service"
+    },
+    {
+      "id": "web",
+      "name": "web",
+      "icon": "aspire-topology-service"
+    }
+  ],
+  "views": [
+    {
+      "id": "view-default",
+      "name": "Architecture",
+      "items": [
+        {
+          "id": "api",
+          "tile": {
+            "x": 0,
+            "y": 3
+          },
+          "labelHeight": 60
+        },
+        {
+          "id": "web",
+          "tile": {
+            "x": 0,
+            "y": 0
+          },
+          "labelHeight": 60
+        }
+      ],
+      "connectors": [
+        {
+          "id": "web--reference--api",
+          "anchors": [
+            {
+              "id": "web--reference--api-from",
+              "ref": {
+                "item": "web"
+              }
+            },
+            {
+              "id": "web--reference--api-to",
+              "ref": {
+                "item": "api"
+              }
+            }
+          ],
+          "description": "Reference",
+          "color": "reference",
+          "style": "SOLID",
+          "width": 10
+        }
+      ],
+      "rectangles": [],
+      "textBoxes": []
+    }
+  ]
+}

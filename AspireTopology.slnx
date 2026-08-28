@@ -1,4 +1,11 @@
 <Solution>
+  <Folder Name="/solution items/">
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="NuGet.config" />
+    <File Path="global.json" />
+    <File Path="README.md" />
+  </Folder>
   <Folder Name="/src/">
     <Project Path="src/AspireTopology.Hosting/AspireTopology.Hosting.csproj" />
     <Project Path="src/AspireTopology.Isoflow/AspireTopology.Isoflow.csproj" />
@@ -8,5 +15,10 @@
     <Project Path="tests/AspireTopology.Hosting.Tests/AspireTopology.Hosting.Tests.csproj" />
     <Project Path="tests/AspireTopology.Isoflow.Tests/AspireTopology.Isoflow.Tests.csproj" />
     <Project Path="tests/AspireTopology.Tests/AspireTopology.Tests.csproj" />
+  </Folder>
+  <Folder Name="/samples/">
+    <Project Path="samples/AspireTopology.Sample/AspireTopology.Sample.AppHost/AspireTopology.Sample.AppHost.csproj" />
+    <Project Path="samples/AspireTopology.Sample/AspireTopology.Sample.Api/AspireTopology.Sample.Api.csproj" />
+    <Project Path="samples/AspireTopology.Sample/AspireTopology.Sample.Web/AspireTopology.Sample.Web.csproj" />
   </Folder>
 </Solution>

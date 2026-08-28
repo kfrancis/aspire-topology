@@ -427,3 +427,9 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# AspireTopology
+artifacts/
+node_modules/
+TestResults/
+nupkg/
