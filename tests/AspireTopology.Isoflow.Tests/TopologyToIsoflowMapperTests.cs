@@ -65,11 +65,70 @@ public class TopologyToIsoflowMapperTests
     [Test]
     public async Task Map_DrawsDependenciesDashed()
     {
-        var view = new TopologyToIsoflowMapper().Map(SampleTopologies.PostgresAndRedis()).Views.Single();
+        var topology = SampleTopologies.PostgresAndRedis();
+        var view = new TopologyToIsoflowMapper().Map(topology).Views.Single();
 
-        var dependency = view.Connectors.Single(connector => connector.Description == nameof(TopologyEdgeKind.Dependency));
+        var dependencyId = topology.Edges.Single(edge => edge.Kind == TopologyEdgeKind.Dependency).Id;
+        var dependency = view.Connectors.Single(connector => connector.Id == dependencyId);
 
         await Assert.That(dependency.Style).IsEqualTo("DASHED");
+        await Assert.That(view.Connectors.Where(c => c.Id != dependencyId).All(c => c.Style == "SOLID")).IsTrue();
+    }
+
+    [Test]
+    public async Task Map_LeavesConnectorsUnlabelledByDefault()
+    {
+        // A label on every line buries the diagram. Colour and dashes carry the edge kind instead.
+        var view = new TopologyToIsoflowMapper().Map(SampleTopologies.PostgresAndRedis()).Views.Single();
+
+        await Assert.That(view.Connectors.All(connector => connector.Description is null)).IsTrue();
+    }
+
+    [Test]
+    public async Task Map_LabelsConnectorsWhenAsked()
+    {
+        var options = new IsoflowRendererOptions { ShowEdgeLabels = true };
+
+        var view = new TopologyToIsoflowMapper(options).Map(SampleTopologies.PostgresAndRedis()).Views.Single();
+
+        await Assert.That(view.Connectors.All(connector => !string.IsNullOrEmpty(connector.Description))).IsTrue();
+    }
+
+    [Test]
+    public async Task Map_KeepsItemDescriptionsToOneLine()
+    {
+        // The description lands inside the label next to the node, so it has to stay short.
+        var document = new TopologyToIsoflowMapper().Map(SampleTopologies.PostgresAndRedis());
+
+        await Assert.That(document.Items.All(item => item.Description is { Length: > 0 } text
+            && !text.Contains('\n')
+            && text.Length < 24)).IsTrue();
+    }
+
+    [Test]
+    public async Task Map_MarksIconsAsAlreadyProjected()
+    {
+        // Isoflow projects flat icons onto the grid, which turns a square into a hard diamond. The
+        // built-in icons are drawn isometric already, so they must say so.
+        var document = new TopologyToIsoflowMapper().Map(SampleTopologies.PostgresAndRedis());
+
+        await Assert.That(document.Icons.All(icon => icon.IsIsometric)).IsTrue();
+    }
+
+    [Test]
+    public async Task Map_DrawsRectanglesOnlyForContainment()
+    {
+        var topology = SampleTopologies.PostgresAndRedis();
+        var withLogical = topology with
+        {
+            Groups = [.. topology.Groups, new TopologyGroup("group-Backend", "Backend", TopologyGroupKind.Logical, ["api"])],
+        };
+
+        var view = new TopologyToIsoflowMapper().Map(withLogical).Views.Single();
+
+        // Logical groups are arbitrary sets whose bounding boxes overlap everything else.
+        await Assert.That(view.Rectangles.Count).IsEqualTo(1);
+        await Assert.That(view.Rectangles[0].Id).IsEqualTo("rect-contains-postgres");
     }
 
     [Test]

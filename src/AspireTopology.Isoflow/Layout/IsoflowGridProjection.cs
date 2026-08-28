@@ -9,10 +9,10 @@ namespace AspireTopology.Isoflow.Layout;
 public sealed class IsoflowGridProjection
 {
     /// <summary>Grid columns between adjacent nodes in the same layer.</summary>
-    public int ColumnStep { get; init; } = 3;
+    public int ColumnStep { get; init; } = 4;
 
     /// <summary>Grid rows between adjacent layers.</summary>
-    public int RowStep { get; init; } = 3;
+    public int RowStep { get; init; } = 4;
 
     /// <summary>Projects a layout onto the grid.</summary>
     /// <param name="topology">The topology the layout belongs to.</param>
@@ -42,6 +42,31 @@ public sealed class IsoflowGridProjection
             tiles[node.Id] = tile;
         }
 
-        return tiles;
+        return Centre(tiles);
+    }
+
+    /// <summary>
+    /// Shifts every tile so the diagram straddles the grid origin.
+    /// </summary>
+    /// <remarks>
+    /// Isoflow opens looking at tile (0, 0) and does not fit the content to the viewport, so a
+    /// diagram that grows downwards from the origin opens with half of itself off screen.
+    /// </remarks>
+    private static IReadOnlyDictionary<string, (int X, int Y)> Centre(Dictionary<string, (int X, int Y)> tiles)
+    {
+        if (tiles.Count == 0)
+        {
+            return tiles;
+        }
+
+        var offsetX = (tiles.Values.Min(tile => tile.X) + tiles.Values.Max(tile => tile.X)) / 2;
+        var offsetY = (tiles.Values.Min(tile => tile.Y) + tiles.Values.Max(tile => tile.Y)) / 2;
+
+        // Centred exactly, which also puts a node on tile (0, 0). Isoflow draws a cursor highlight
+        // there, and an occupied origin hides it; an offset diagram leaves it floating in space.
+        return tiles.ToDictionary(
+            entry => entry.Key,
+            entry => (entry.Value.X - offsetX, entry.Value.Y - offsetY),
+            StringComparer.Ordinal);
     }
 }

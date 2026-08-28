@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Isoflow from 'isoflow';
 import isoflowIsopack from '@isoflow/isopacks/dist/isoflow';
 import awsIsopack from '@isoflow/isopacks/dist/aws';
@@ -9,6 +9,7 @@ import { flattenCollections } from '@isoflow/isopacks/dist/utils';
 import {
   applyLayoutOverrides,
   extractLayoutOverrides,
+  legendFor,
   mergeIcons,
   type IsoflowInitialData,
   type LayoutOverrides,
@@ -79,37 +80,72 @@ export function App() {
     };
   }, []);
 
+  const legend = useMemo(() => (data ? legendFor(data) : null), [data]);
+
   if (error) {
     return (
-      <main style={{ padding: 24 }}>
+      <main className="message">
         <h1>Could not load the topology</h1>
         <p>
           Tried <code>{topologyUrl}</code>: {error}
         </p>
         <p>
-          Run <code>aspire do topology</code> in the AppHost, then copy
-          <code> topology.isoflow.json</code> into <code>public/</code>.
+          Run <code>aspire do topology</code> in the AppHost, then copy{' '}
+          <code>topology.isoflow.json</code> into <code>public/</code>.
         </p>
       </main>
     );
   }
 
   if (!data) {
-    return <main style={{ padding: 24 }}>Loading…</main>;
+    return <main className="message">Loading…</main>;
   }
 
   return (
-    <Isoflow
-      initialData={data}
-      editorMode="EDITABLE"
-      onModelUpdate={(model: IsoflowInitialData) => {
-        // Isoflow reports every model change. Persisting only the positions keeps the generated
-        // topology authoritative for what exists, and the human file authoritative for placement.
-        window.localStorage.setItem(
-          layoutStorageKey,
-          JSON.stringify(extractLayoutOverrides(model), null, 2),
-        );
-      }}
-    />
+    <>
+      <header className="topbar">
+        <span className="topbar__mark" />
+        <span className="topbar__title">{data.title}</span>
+        <span className="topbar__subtitle">Architecture</span>
+
+        {legend && (
+          <div className="legend">
+            {legend.kinds.map((kind) => (
+              <span className="legend__item" key={kind.id}>
+                <span className="legend__swatch" style={{ background: kind.color }} />
+                {kind.name}
+              </span>
+            ))}
+            {legend.edges.map((edge) => (
+              <span className="legend__item" key={edge.id}>
+                <span
+                  className="legend__line"
+                  style={{
+                    borderTopColor: edge.color,
+                    borderTopStyle: edge.dashed ? 'dashed' : 'solid',
+                  }}
+                />
+                {edge.name}
+              </span>
+            ))}
+          </div>
+        )}
+      </header>
+
+      <div className="canvas">
+        <Isoflow
+          initialData={data}
+          editorMode="EDITABLE"
+          onModelUpdate={(model: IsoflowInitialData) => {
+            // Isoflow reports every model change. Persisting only the positions keeps the generated
+            // topology authoritative for what exists, and the human file authoritative for placement.
+            window.localStorage.setItem(
+              layoutStorageKey,
+              JSON.stringify(extractLayoutOverrides(model), null, 2),
+            );
+          }}
+        />
+      </div>
+    </>
   );
 }

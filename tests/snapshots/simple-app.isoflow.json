@@ -5,34 +5,40 @@
     {
       "id": "aspire-topology-service",
       "name": "Service",
-      "url": "data:image/svg\u002Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0Ij48cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHJ4PSIxMCIgZmlsbD0iIzI1NjNlYiIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSIzLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI\u002BPHJlY3QgeD0iMTYiIHk9IjE4IiB3aWR0aD0iMzIiIGhlaWdodD0iMjgiIHJ4PSI0Ii8\u002BPHBhdGggZD0iTTI0IDMwaDE2TTI0IDM4aDEwIi8\u002BPC9nPjwvc3ZnPg==",
+      "url": "data:image/svg\u002Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCI\u002BPGcgc3Ryb2tlPSIjMmYxOTdiIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI\u002BPHBhdGggZD0iTTUwLDMzIEw4Miw0OSBMNTAsNjUgTDE4LDQ5IFoiIGZpbGw9IiM4YzczZTMiLz48cGF0aCBkPSJNMTgsNDkgTDUwLDY1IEw1MCw5MSBMMTgsNzUgWiIgZmlsbD0iIzQ5MjdiZiIvPjxwYXRoIGQ9Ik01MCw2NSBMODIsNDkgTDgyLDc1IEw1MCw5MSBaIiBmaWxsPSIjMzkxZTk0Ii8\u002BPC9nPjwvc3ZnPg==",
       "collection": "AspireTopology",
-      "isIsometric": false
+      "isIsometric": true
     }
   ],
   "colors": [
     {
       "id": "reference",
-      "value": "#2563eb"
+      "value": "#512bd4"
     },
     {
       "id": "dependency",
-      "value": "#94a3b8"
+      "value": "#dce0e8"
     },
     {
       "id": "parent",
-      "value": "#7c3aed"
+      "value": "#b9aaee"
+    },
+    {
+      "id": "group",
+      "value": "#ece7fa"
     }
   ],
   "items": [
     {
       "id": "api",
       "name": "api",
+      "description": "Service",
       "icon": "aspire-topology-service"
     },
     {
       "id": "web",
       "name": "web",
+      "description": "Service",
       "icon": "aspire-topology-service"
     }
   ],
@@ -45,17 +51,17 @@
           "id": "api",
           "tile": {
             "x": 0,
-            "y": 3
+            "y": 2
           },
-          "labelHeight": 60
+          "labelHeight": 40
         },
         {
           "id": "web",
           "tile": {
             "x": 0,
-            "y": 0
+            "y": -2
           },
-          "labelHeight": 60
+          "labelHeight": 40
         }
       ],
       "connectors": [
@@ -75,10 +81,9 @@
               }
             }
           ],
-          "description": "Reference",
           "color": "reference",
           "style": "SOLID",
-          "width": 10
+          "width": 8
         }
       ],
       "rectangles": [],

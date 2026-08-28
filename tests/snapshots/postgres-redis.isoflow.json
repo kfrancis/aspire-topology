@@ -5,65 +5,72 @@
     {
       "id": "aspire-topology-service",
       "name": "Service",
-      "url": "data:image/svg\u002Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0Ij48cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHJ4PSIxMCIgZmlsbD0iIzI1NjNlYiIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSIzLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI\u002BPHJlY3QgeD0iMTYiIHk9IjE4IiB3aWR0aD0iMzIiIGhlaWdodD0iMjgiIHJ4PSI0Ii8\u002BPHBhdGggZD0iTTI0IDMwaDE2TTI0IDM4aDEwIi8\u002BPC9nPjwvc3ZnPg==",
+      "url": "data:image/svg\u002Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCI\u002BPGcgc3Ryb2tlPSIjMmYxOTdiIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI\u002BPHBhdGggZD0iTTUwLDMzIEw4Miw0OSBMNTAsNjUgTDE4LDQ5IFoiIGZpbGw9IiM4YzczZTMiLz48cGF0aCBkPSJNMTgsNDkgTDUwLDY1IEw1MCw5MSBMMTgsNzUgWiIgZmlsbD0iIzQ5MjdiZiIvPjxwYXRoIGQ9Ik01MCw2NSBMODIsNDkgTDgyLDc1IEw1MCw5MSBaIiBmaWxsPSIjMzkxZTk0Ii8\u002BPC9nPjwvc3ZnPg==",
       "collection": "AspireTopology",
-      "isIsometric": false
+      "isIsometric": true
     },
     {
       "id": "aspire-topology-database",
       "name": "Database",
-      "url": "data:image/svg\u002Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0Ij48cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHJ4PSIxMCIgZmlsbD0iIzdjM2FlZCIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSIzLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI\u002BPGVsbGlwc2UgY3g9IjMyIiBjeT0iMjAiIHJ4PSIxNiIgcnk9IjYiLz48cGF0aCBkPSJNMTYgMjB2MjRjMCAzLjMgNy4yIDYgMTYgNnMxNi0yLjcgMTYtNlYyMCIvPjxwYXRoIGQ9Ik0xNiAzMmMwIDMuMyA3LjIgNiAxNiA2czE2LTIuNyAxNi02Ii8\u002BPC9nPjwvc3ZnPg==",
+      "url": "data:image/svg\u002Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCI\u002BPGcgc3Ryb2tlPSIjMDY0ODMyIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI\u002BPHBhdGggZD0iTTE4LDQ5IEwxOCw3NSBBMzIsMTYgMCAwIDAgODIsNzUgTDgyLDQ5IFoiIGZpbGw9IiMwOTcwNGQiLz48cGF0aCBkPSJNNjQuNCw2Mi42IEw4Miw0OSBMODIsNzUgQTMyLDE2IDAgMCAxIDY0LjQsODQuNiBaIiBmaWxsPSIjMDc1ODNjIiBzdHJva2U9Im5vbmUiLz48ZWxsaXBzZSBjeD0iNTAiIGN5PSI0OSIgcng9IjMyIiByeT0iMTYiIGZpbGw9IiM1ZGE5OGYiLz48L2c\u002BPC9zdmc\u002B",
       "collection": "AspireTopology",
-      "isIsometric": false
+      "isIsometric": true
     },
     {
       "id": "aspire-topology-cache",
       "name": "Cache",
-      "url": "data:image/svg\u002Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0Ij48cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHJ4PSIxMCIgZmlsbD0iI2RjMjYyNiIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSIzLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI\u002BPHBhdGggZD0iTTM0IDEyIDIwIDM2aDEybC0yIDE2IDE0LTI0SDMyeiIvPjwvZz48L3N2Zz4=",
+      "url": "data:image/svg\u002Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCI\u002BPGcgc3Ryb2tlPSIjNTkxYTMxIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI\u002BPHBhdGggZD0iTTE4LDQ5IEwxOCw3NSBBMzIsMTYgMCAwIDAgODIsNzUgTDgyLDQ5IFoiIGZpbGw9IiM4YjI4NGMiLz48cGF0aCBkPSJNNjQuNCw2Mi42IEw4Miw0OSBMODIsNzUgQTMyLDE2IDAgMCAxIDY0LjQsODQuNiBaIiBmaWxsPSIjNmMyMDNjIiBzdHJva2U9Im5vbmUiLz48ZWxsaXBzZSBjeD0iNTAiIGN5PSI0OSIgcng9IjMyIiByeT0iMTYiIGZpbGw9IiNiYzc0OGYiLz48L2c\u002BPC9zdmc\u002B",
       "collection": "AspireTopology",
-      "isIsometric": false
+      "isIsometric": true
     }
   ],
   "colors": [
     {
       "id": "reference",
-      "value": "#2563eb"
+      "value": "#512bd4"
     },
     {
       "id": "dependency",
-      "value": "#94a3b8"
+      "value": "#dce0e8"
     },
     {
       "id": "parent",
-      "value": "#7c3aed"
+      "value": "#b9aaee"
+    },
+    {
+      "id": "group",
+      "value": "#ece7fa"
     }
   ],
   "items": [
     {
       "id": "api",
       "name": "api",
-      "description": "aspire.resourceType: ProjectResource\nendpoint.http.targetPort: 8080",
+      "description": "Service",
       "icon": "aspire-topology-service"
     },
     {
       "id": "appdb",
       "name": "appdb",
+      "description": "Database",
       "icon": "aspire-topology-database"
     },
     {
       "id": "cache",
       "name": "cache",
-      "description": "container.image: redis\ncontainer.tag: 7.4",
+      "description": "Cache",
       "icon": "aspire-topology-cache"
     },
     {
       "id": "postgres",
       "name": "postgres",
+      "description": "Database",
       "icon": "aspire-topology-database"
     },
     {
       "id": "web",
       "name": "web",
+      "description": "Service",
       "icon": "aspire-topology-service"
     }
   ],
@@ -76,41 +83,41 @@
           "id": "api",
           "tile": {
             "x": 0,
-            "y": 3
+            "y": 0
           },
-          "labelHeight": 60
+          "labelHeight": 40
         },
         {
           "id": "appdb",
           "tile": {
-            "x": -2,
-            "y": 6
+            "x": 0,
+            "y": 4
           },
-          "labelHeight": 60
+          "labelHeight": 40
         },
         {
           "id": "cache",
           "tile": {
-            "x": 2,
-            "y": 6
+            "x": -4,
+            "y": 4
           },
-          "labelHeight": 60
+          "labelHeight": 40
         },
         {
           "id": "postgres",
           "tile": {
-            "x": -2,
-            "y": 0
+            "x": 4,
+            "y": 4
           },
-          "labelHeight": 60
+          "labelHeight": 40
         },
         {
           "id": "web",
           "tile": {
-            "x": 2,
-            "y": 0
+            "x": 0,
+            "y": -4
           },
-          "labelHeight": 60
+          "labelHeight": 40
         }
       ],
       "connectors": [
@@ -130,10 +137,9 @@
               }
             }
           ],
-          "description": "Reference",
           "color": "reference",
           "style": "SOLID",
-          "width": 10
+          "width": 8
         },
         {
           "id": "api--dependency--appdb",
@@ -151,10 +157,9 @@
               }
             }
           ],
-          "description": "Dependency",
           "color": "dependency",
           "style": "DASHED",
-          "width": 10
+          "width": 8
         },
         {
           "id": "api--reference--cache",
@@ -172,10 +177,9 @@
               }
             }
           ],
-          "description": "Reference",
           "color": "reference",
           "style": "SOLID",
-          "width": 10
+          "width": 8
         },
         {
           "id": "appdb--parent--postgres",
@@ -193,10 +197,9 @@
               }
             }
           ],
-          "description": "Parent",
           "color": "parent",
           "style": "SOLID",
-          "width": 10
+          "width": 8
         },
         {
           "id": "web--reference--api",
@@ -214,24 +217,23 @@
               }
             }
           ],
-          "description": "Reference",
           "color": "reference",
           "style": "SOLID",
-          "width": 10
+          "width": 8
         }
       ],
       "rectangles": [
         {
           "id": "rect-contains-postgres",
           "from": {
-            "x": -3,
-            "y": -1
+            "x": -1,
+            "y": 3
           },
           "to": {
-            "x": -1,
-            "y": 7
+            "x": 5,
+            "y": 5
           },
-          "color": "reference"
+          "color": "group"
         }
       ],
       "textBoxes": []

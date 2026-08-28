@@ -7,6 +7,8 @@ Aspire's `DistributedApplicationModel` and converts resources, references, depen
 and containment relationships into a renderer-independent topology model. That topology is then
 rendered as an interactive Isoflow diagram, or exported to other formats.
 
+![Isometric architecture diagram generated from the sample AppHost](https://raw.githubusercontent.com/kfrancis/aspire-topology/main/docs/images/viewer.png)
+
 ## Use it
 
 ```csharp
@@ -42,10 +44,7 @@ That one `AddTopologyDiagram()` call is also all it takes to get the diagram int
 `aspire run` lists **topology** alongside your other resources, with a clickable URL, the way an
 integration lists its management UI:
 
-```text
-Name       State     URLs
-topology   Running   http://127.0.0.1:63304
-```
+![The Aspire dashboard resource list, with a topology resource linking to the diagram](https://raw.githubusercontent.com/kfrancis/aspire-topology/main/docs/images/dashboard.png)
 
 The viewer is served from inside the AppHost. No container runtime, no Node.js, no second package:
 its front end is embedded in `AspireTopology.Hosting`. It renders from the live

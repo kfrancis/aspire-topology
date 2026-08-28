@@ -22,4 +22,13 @@ public sealed class IsoflowRendererOptions
 
     /// <summary>Whether containment groups are drawn as background rectangles.</summary>
     public bool RenderGroupRectangles { get; set; } = true;
+
+    /// <summary>
+    /// Whether every connector carries a text label naming its edge kind.
+    /// </summary>
+    /// <remarks>
+    /// Off by default. Colour and dashes already distinguish the kinds, and a label per line turns
+    /// a readable diagram into a wall of small text.
+    /// </remarks>
+    public bool ShowEdgeLabels { get; set; }
 }

@@ -5,15 +5,117 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AspireTopology Viewer</title>
     <style>
+      /*
+        Aspire's own palette, from the --aspire-color-* custom properties published by aspire.dev.
+        The font stack leads with the faces Aspire's site and dashboard use where they are present,
+        and falls back to the system UI font: no webfont is downloaded, so the viewer works offline
+        and inside the AppHost.
+      */
+      :root {
+        --aspire-purple: #512bd4;
+        --aspire-primary: #7455dd;
+        --aspire-secondary: #b9aaee;
+        --aspire-black: #1f1e33;
+        --aspire-grey: #dce0e8;
+        --aspire-muted: #66697e;
+        --aspire-surface: #ffffff;
+        --aspire-canvas: #f5f6f8;
+      }
+
       html,
       body,
       #root {
         height: 100%;
         margin: 0;
-        font-family: system-ui, sans-serif;
+      }
+
+      body {
+        background: var(--aspire-canvas);
+        color: var(--aspire-black);
+        font-family: Poppins, "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      #root {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex: 0 0 auto;
+        padding: 0.6rem 1rem;
+        background: var(--aspire-surface);
+        border-bottom: 1px solid var(--aspire-grey);
+      }
+
+      .topbar__mark {
+        width: 0.7rem;
+        height: 0.7rem;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--aspire-purple), var(--aspire-primary));
+      }
+
+      .topbar__title {
+        font-size: 0.95rem;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+
+      .topbar__subtitle {
+        font-size: 0.8rem;
+        color: var(--aspire-muted);
+      }
+
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.85rem;
+        margin-left: auto;
+      }
+
+      .legend__item {
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: 0.75rem;
+        color: var(--aspire-muted);
+      }
+
+      .legend__swatch {
+        width: 0.55rem;
+        height: 0.55rem;
+        border-radius: 2px;
+      }
+
+      .legend__line {
+        width: 1.1rem;
+        height: 0;
+        border-top-width: 2px;
+      }
+
+      .canvas {
+        position: relative;
+        flex: 1 1 auto;
+        min-height: 0;
+      }
+
+      .message {
+        padding: 2rem;
+        max-width: 40rem;
+      }
+
+      .message code {
+        font-family: "Fira Code", ui-monospace, SFMono-Regular, Consolas, monospace;
+        font-size: 0.85em;
+        background: var(--aspire-grey);
+        border-radius: 3px;
+        padding: 0.1em 0.35em;
       }
     </style>
-    <script type="module" crossorigin src="/assets/index-CbkfFNnD.js"></script>
+    <script type="module" crossorigin src="/assets/index-NoYxa0X1.js"></script>
   </head>
   <body>
     <div id="root"></div>

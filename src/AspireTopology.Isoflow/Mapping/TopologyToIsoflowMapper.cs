@@ -1,4 +1,3 @@
-using System.Globalization;
 using AspireTopology.Isoflow.Model;
 using AspireTopology.Model;
 
@@ -16,7 +15,7 @@ public sealed class TopologyToIsoflowMapper
     public TopologyToIsoflowMapper(IsoflowRendererOptions? options = null) =>
         _options = options ?? new IsoflowRendererOptions();
 
-    /// <summary>Colour used for reference edges and group backgrounds.</summary>
+    /// <summary>Colour used for reference edges.</summary>
     public const string ReferenceColorId = "reference";
 
     /// <summary>Colour used for startup dependency edges.</summary>
@@ -24,6 +23,9 @@ public sealed class TopologyToIsoflowMapper
 
     /// <summary>Colour used for containment edges.</summary>
     public const string ParentColorId = "parent";
+
+    /// <summary>Colour used for the background of a group.</summary>
+    public const string GroupColorId = "group";
 
     /// <summary>Maps a topology to an Isoflow document.</summary>
     /// <param name="topology">The topology to map.</param>
@@ -51,7 +53,7 @@ public sealed class TopologyToIsoflowMapper
             .ToList();
 
         var viewItems = topology.Nodes
-            .Select(node => new IsoflowViewItem(node.Id, new IsoflowTile(tiles[node.Id].X, tiles[node.Id].Y)))
+            .Select(node => new IsoflowViewItem(node.Id, new IsoflowTile(tiles[node.Id].X, tiles[node.Id].Y), LabelHeight: 40))
             .ToList();
 
         var placed = viewItems.Select(item => item.Id).ToHashSet(StringComparer.Ordinal);
@@ -84,21 +86,25 @@ public sealed class TopologyToIsoflowMapper
 
     private static IReadOnlyList<IsoflowColor> Palette { get; } =
     [
-        new IsoflowColor(ReferenceColorId, "#2563eb"),
-        new IsoflowColor(DependencyColorId, "#94a3b8"),
-        new IsoflowColor(ParentColorId, "#7c3aed"),
+        new IsoflowColor(ReferenceColorId, AspirePalette.Purple),
+        new IsoflowColor(DependencyColorId, AspirePalette.Grey),
+        new IsoflowColor(ParentColorId, AspirePalette.Secondary),
+        new IsoflowColor(GroupColorId, AspirePalette.GroupTint),
     ];
 
-    private static IsoflowConnector MapConnector(TopologyEdge edge) =>
+    private IsoflowConnector MapConnector(TopologyEdge edge) =>
         new(
             edge.Id,
             [
                 new IsoflowAnchor($"{edge.Id}-from", new IsoflowAnchorRef(Item: edge.SourceId)),
                 new IsoflowAnchor($"{edge.Id}-to", new IsoflowAnchorRef(Item: edge.TargetId)),
             ],
-            Description: edge.Kind.ToString(),
+            // A label on every line is noise on a diagram this dense. Colour and dashes already say
+            // which kind an edge is, and the topology document still spells it out.
+            Description: _options.ShowEdgeLabels ? edge.Kind.ToString() : null,
             Color: ColorFor(edge.Kind),
-            Style: edge.Kind is TopologyEdgeKind.Dependency ? "DASHED" : "SOLID");
+            Style: edge.Kind is TopologyEdgeKind.Dependency ? "DASHED" : "SOLID",
+            Width: 8);
 
     private static string ColorFor(TopologyEdgeKind kind) => kind switch
     {
@@ -115,6 +121,13 @@ public sealed class TopologyToIsoflowMapper
 
         foreach (var group in topology.Groups)
         {
+            // Only containment. Logical groups are arbitrary sets whose bounding boxes overlap each
+            // other and everything else, which buries the diagram under slabs of colour.
+            if (group.Kind is not TopologyGroupKind.Containment)
+            {
+                continue;
+            }
+
             var members = group.NodeIds
                 .Where(tiles.ContainsKey)
                 .Select(id => tiles[id])
@@ -129,31 +142,27 @@ public sealed class TopologyToIsoflowMapper
                 $"rect-{group.Id}",
                 new IsoflowTile(members.Min(t => t.X) - 1, members.Min(t => t.Y) - 1),
                 new IsoflowTile(members.Max(t => t.X) + 1, members.Max(t => t.Y) + 1),
-                ReferenceColorId));
+                GroupColorId));
         }
 
         return rectangles;
     }
 
-    private static string? DescribeNode(TopologyNode node)
+    /// <summary>
+    /// A one line description for the item label.
+    /// </summary>
+    /// <remarks>
+    /// Isoflow renders the description inside the label beside the node, so this has to stay short.
+    /// Dumping the property bag here produced a diagram of overlapping paragraphs that hid the
+    /// nodes behind them. Every property is still in the topology document.
+    /// </remarks>
+    private static string DescribeNode(TopologyNode node) => Humanize(node.Kind);
+
+    private static string Humanize(TopologyNodeKind kind) => kind switch
     {
-        if (node.Properties.Count == 0)
-        {
-            return null;
-        }
-
-        var lines = node.Properties
-            .OrderBy(pair => pair.Key, StringComparer.Ordinal)
-            .Select(pair => $"{pair.Key}: {Format(pair.Value)}");
-
-        return string.Join('\n', lines);
-    }
-
-    private static string Format(object? value) => value switch
-    {
-        null => string.Empty,
-        bool flag => flag ? "true" : "false",
-        IFormattable formattable => formattable.ToString(null, CultureInfo.InvariantCulture),
-        _ => value.ToString() ?? string.Empty,
+        TopologyNodeKind.MessageBroker => "Message broker",
+        TopologyNodeKind.ExternalService => "External service",
+        TopologyNodeKind.Unknown => "Resource",
+        _ => kind.ToString(),
     };
 }
